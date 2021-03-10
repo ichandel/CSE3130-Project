@@ -14,7 +14,4 @@ class Colour:
     BLACK = (0, 0, 0)
 
 class Image:
-    PLAYER = "assets/bunny.png"
-    BACKGROUND = "assets/grass.png"
-    SHRUB = "assets/shrubs.png"
-    EGGS = ['assets/egg1.png', 'assets/egg2.png']
+    pass
