@@ -8,11 +8,11 @@ from mySprite import MySprite
 
 class Text(MySprite):
 
-    def __init__(self, TEXT="HELLO WORLD", COLOUR=Colour.WHITE):
+    def __init__(self, TEXT="HELLO WORLD", COLOUR=Colour.WHITE, FONTSIZE=36, FONT="Times New Roman"):
         super().__init__()
         self.TEXT = TEXT
         self.COLOUR = COLOUR
-        self.FONT = pygame.font.SysFont("Times New Roman", 36)
+        self.FONT = pygame.font.SysFont(FONT, FONTSIZE)
         self.SCREEN = self.FONT.render(self.TEXT, True, self.COLOUR)
 
     def setText(self, NEW_TEXT):
