@@ -22,7 +22,9 @@ class Ball(MySprite):
         self.DIMENSION = (self.WIDTH, self.HEIGHT)
         self.SCREEN = pygame.Surface(self.DIMENSION, pygame.SRCALPHA, 32)
         self.SCREEN.fill(self.COLOUR)
-        self.SPEED = 10
+        self.SPEED = 5
+        self.DIR_X = 1
+        self.DIR_Y = -1
 
     def bounce(self, SCREEN):
         self.X = self.X + self.DIR_X * self.SPEED
@@ -35,4 +37,4 @@ class Ball(MySprite):
             self.DIR_Y = -1
         if self.Y < 0:
             self.DIR_Y = 1
-        self.POS = (self.X, self.Y)
+        self.updatePOS()

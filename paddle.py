@@ -25,6 +25,10 @@ class Paddle(MySprite):
 
     def adMove(self, KEYPRESSES):
         if KEYPRESSES[pygame.K_a]:
-            self.X = self.X + self.SPEED
+            self.X = self.X - self.SPEED
         if KEYPRESSES[pygame.K_d]:
             self.X = self.X + self.SPEED
+
+    def adMoveChkBounds(self, KEYPRESSES, MAXWIDTH, MAXHEIGHT, MINWIDTH=0, MINHEIGHT=0):
+        self.adMove(KEYPRESSES)
+        self.checkBounds(MAXWIDTH, MAXHEIGHT, MINWIDTH, MINHEIGHT)

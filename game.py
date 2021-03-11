@@ -20,8 +20,9 @@ class Game:
     def __init__(self):
         self.WINDOW = Window(WIDTH=1920, HEIGHT=1080, FPS=60)
         self.WINDOW.setBackgroundColor(Colour.BLACK)
-        self.SCORE = 0
-        self.SCORE_TEXT = Text(f"Score: {self.SCORE}")
+        self.PADDLE = Paddle()
+        self.BALL = Ball()
+
 
 
     def placeItems(self):
@@ -58,6 +59,8 @@ class Game:
 
     def run(self):
 
+        self.PADDLE.setPOS((self.WINDOW.getVirtualWidth() - self.PADDLE.getWidth()) // 2, (self.WINDOW.getVirtualHeight() - (self.WINDOW.getVirtualHeight() // 8)))
+        self.BALL.setPOS((self.WINDOW.getVirtualWidth() - self.BALL.getWidth()) // 2, (self.WINDOW.getVirtualHeight() - (self.WINDOW.getVirtualHeight() // 8) * 2))
         while True:
             # Inputs
             for event in pygame.event.get():
@@ -65,20 +68,16 @@ class Game:
                     pygame.quit()
                     exit()
 
-            KEYS_PRESSED = pygame.key.get_pressed()
-
-            PADDLE = Paddle()
-            BALL = Ball()
             # Processing
 
+            KEYPRESSES = pygame.key.get_pressed()
+
+            self.PADDLE.adMoveChkBounds(KEYPRESSES, self.WINDOW.getVirtualWidth(), self.WINDOW.getVirtualHeight())
+            self.BALL.bounce(self.WINDOW)
+
             self.WINDOW.clearScreen()
-            PADDLE.setPOS((self.WINDOW.getVirtualWidth() - PADDLE.getWidth()) // 2, (self.WINDOW.getVirtualHeight() - (self.WINDOW.getVirtualHeight()//8)))
-            BALL.setPOS((self.WINDOW.getVirtualWidth() - BALL.getWidth()) // 2, (self.WINDOW.getVirtualHeight() - (self.WINDOW.getVirtualHeight() // 8)*2))
-
-            self.WINDOW.getScreen().blit(PADDLE.getScreen(), PADDLE.getPOS())
-            self.WINDOW.getScreen().blit(BALL.getScreen(), BALL.getPOS())
-
-
+            self.WINDOW.getScreen().blit(self.PADDLE.getScreen(), self.PADDLE.getPOS())
+            self.WINDOW.getScreen().blit(self.BALL.getScreen(), self.BALL.getPOS())
             self.WINDOW.updateFrame()
 
 
