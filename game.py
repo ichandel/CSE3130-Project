@@ -68,12 +68,16 @@ class Game:
             KEYS_PRESSED = pygame.key.get_pressed()
 
             PADDLE = Paddle()
-
+            BALL = Ball()
             # Processing
+
             self.WINDOW.clearScreen()
             PADDLE.setPOS((self.WINDOW.getVirtualWidth() - PADDLE.getWidth()) // 2, (self.WINDOW.getVirtualHeight() - (self.WINDOW.getVirtualHeight()//8)))
+            BALL.setPOS((self.WINDOW.getVirtualWidth() - BALL.getWidth()) // 2, (self.WINDOW.getVirtualHeight() - (self.WINDOW.getVirtualHeight() // 8)*2))
 
             self.WINDOW.getScreen().blit(PADDLE.getScreen(), PADDLE.getPOS())
+            self.WINDOW.getScreen().blit(BALL.getScreen(), BALL.getPOS())
+
 
             self.WINDOW.updateFrame()
 

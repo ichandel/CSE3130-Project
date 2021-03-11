@@ -12,7 +12,7 @@ class Paddle(MySprite):
 
     def __init__(self):
         super().__init__()
-        self.WIDTH = 150
+        self.WIDTH = 200
         self.HEIGHT = 10
         self.COLOUR = Colour.WHITE
         self.X = 50
