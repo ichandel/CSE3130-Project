@@ -12,6 +12,7 @@ from loader import Colour
 from paddle import Paddle
 from ball import Ball
 from text import Text
+from brick import Brick
 
 class Game:
 
@@ -22,11 +23,20 @@ class Game:
         self.WINDOW.setBackgroundColor(Colour.BLACK)
         self.PADDLE = Paddle()
         self.BALL = Ball()
+        self.BRICKS = []
+        self.placeBricks()
 
-
-
-    def placeItems(self):
-        pass
+    def placeBricks(self):
+        STARTX = 0
+        STARTY = 50
+        for i in range(24):
+            if STARTX < (self.WINDOW.getVirtualWidth() // 10) * 8:
+                STARTX = STARTX + self.WINDOW.getVirtualWidth() // 10
+            else:
+                STARTX = self.WINDOW.getVirtualWidth() // 10
+                STARTY = STARTY + 120
+            NEWBRICK = Brick(STARTX, STARTY)
+            self.BRICKS.append(NEWBRICK)
 
     def getSpriteCollision(self, SPRITE1, SPRITE2):
         if pygame.Rect.colliderect(SPRITE1.getRect(), SPRITE2.getRect()):
@@ -61,6 +71,9 @@ class Game:
 
         self.PADDLE.setPOS((self.WINDOW.getVirtualWidth() - self.PADDLE.getWidth()) // 2, (self.WINDOW.getVirtualHeight() - (self.WINDOW.getVirtualHeight() // 8)))
         self.BALL.setPOS((self.WINDOW.getVirtualWidth() - self.BALL.getWidth()) // 2, (self.WINDOW.getVirtualHeight() - (self.WINDOW.getVirtualHeight() // 8) * 2))
+        for brick in self.BRICKS:
+            brick.setPOS(brick.X, brick.Y)
+
         while True:
             # Inputs
             for event in pygame.event.get():
@@ -76,6 +89,8 @@ class Game:
             self.BALL.bounce(self.WINDOW)
 
             self.WINDOW.clearScreen()
+            for brick in self.BRICKS:
+                self.WINDOW.getScreen().blit(brick.getScreen(), brick.getPOS())
             self.WINDOW.getScreen().blit(self.PADDLE.getScreen(), self.PADDLE.getPOS())
             self.WINDOW.getScreen().blit(self.BALL.getScreen(), self.BALL.getPOS())
             self.WINDOW.updateFrame()

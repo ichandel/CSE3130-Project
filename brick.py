@@ -14,13 +14,14 @@ class Brick(MySprite):
         super().__init__()
         self.X = X
         self.Y = Y
-        self.TOP = pygame.Rect(self.X, self.Y)
+        self.POS = (self.X, self.Y)
+        self.COLOUR = Colour.GREY
+        '''self.TOP = pygame.Rect(self.X, self.Y)
         self.LEFT = pygame.Rect(self.X, self.Y)
         self.RIGHT = pygame.Rect(self.X, self.Y)
-        self.BOTTOM = pygame.Rect(self.X, self.Y)
+        self.BOTTOM = pygame.Rect(self.X, self.Y)'''
         self.WIDTH = 150
         self.HEIGHT = 100
         self.DIMENSION = (self.WIDTH, self.HEIGHT)
-        self.COLOUR = Colour.GREY
         self.SCREEN = pygame.Surface(self.DIMENSION, pygame.SRCALPHA, 32)
         self.SCREEN.fill(self.COLOUR)
