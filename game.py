@@ -24,9 +24,8 @@ class Game:
         self.PADDLE = Paddle()
         self.BALL = Ball()
         self.BRICKS = []
-        self.placeBricks()
 
-    def placeBricks(self):
+    def placeBricksLvl1(self):
         STARTX = 0
         STARTY = 50
         for i in range(24):
@@ -38,8 +37,8 @@ class Game:
             NEWBRICK = Brick(STARTX, STARTY)
             self.BRICKS.append(NEWBRICK)
 
-    def getSpriteCollision(self, SPRITE1, SPRITE2):
-        if pygame.Rect.colliderect(SPRITE1.getRect(), SPRITE2.getRect()):
+    def getPaddleBallCollision(self):
+        if pygame.Rect.colliderect(self.PADDLE.getRect(), self.BALL.getRect()):
             return True
         else:
             return False
@@ -57,17 +56,51 @@ class Game:
 
             self.TITLE = Text("Welcome To Brickbreaker :)!")
             self.SUBTITLE = Text("Press enter to continue.", FONTSIZE=20)
+            self.SUBTITLE3 = Text("Press ESC to exit.", FONTSIZE=20)
             self.TITLE.setPOS((self.WINDOW.getVirtualWidth() - self.TITLE.getWidth()) // 2, (self.WINDOW.getVirtualHeight() - self.TITLE.getHeight()) // 2 - 50)
             self.SUBTITLE.setPOS((self.WINDOW.getVirtualWidth() - self.SUBTITLE.getWidth()) // 2, (self.WINDOW.getVirtualHeight() - self.SUBTITLE.getHeight()) // 2 + 20)
+            self.SUBTITLE3.setPOS((self.WINDOW.getVirtualWidth() - self.SUBTITLE3.getWidth()) // 2, (self.WINDOW.getVirtualHeight() - self.SUBTITLE3.getHeight()) // 2 + 50)
             self.WINDOW.getScreen().blit(self.TITLE.getScreen(), self.TITLE.getPOS())
             self.WINDOW.getScreen().blit(self.SUBTITLE.getScreen(), self.SUBTITLE.getPOS())
+            self.WINDOW.getScreen().blit(self.SUBTITLE3.getScreen(), self.SUBTITLE3.getPOS())
             self.WINDOW.updateFrame()
 
             if KEYPRESSES[pygame.K_RETURN]:
-                return
+                self.run()
+            if KEYPRESSES[pygame.K_ESCAPE]:
+                exit()
 
+    def endScreen(self):
+
+        while True:
+            # Inputs
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    exit()
+
+            KEYPRESSES = pygame.key.get_pressed()
+
+            self.TITLE2 = Text("Game Over!")
+            self.SUBTITLE2 = Text("Press enter to play again.", FONTSIZE=20)
+            self.SUBTITLE3 = Text("Press ESC to exit.", FONTSIZE=20)
+            self.TITLE2.setPOS((self.WINDOW.getVirtualWidth() - self.TITLE2.getWidth()) // 2, (self.WINDOW.getVirtualHeight() - self.TITLE2.getHeight()) // 2 - 50)
+            self.SUBTITLE2.setPOS((self.WINDOW.getVirtualWidth() - self.SUBTITLE2.getWidth()) // 2, (self.WINDOW.getVirtualHeight() - self.SUBTITLE2.getHeight()) // 2 + 20)
+            self.SUBTITLE3.setPOS((self.WINDOW.getVirtualWidth() - self.SUBTITLE3.getWidth()) // 2, (self.WINDOW.getVirtualHeight() - self.SUBTITLE3.getHeight()) // 2 + 50)
+            self.WINDOW.getScreen().blit(self.TITLE2.getScreen(), self.TITLE2.getPOS())
+            self.WINDOW.getScreen().blit(self.SUBTITLE2.getScreen(), self.SUBTITLE2.getPOS())
+            self.WINDOW.getScreen().blit(self.SUBTITLE3.getScreen(), self.SUBTITLE3.getPOS())
+            self.WINDOW.updateFrame()
+
+            if KEYPRESSES[pygame.K_RETURN]:
+                self.run()
+            if KEYPRESSES[pygame.K_ESCAPE]:
+                exit()
 
     def run(self):
+
+        self.placeBricksLvl1()
+        self.BALL.SPEED = 5
 
         self.PADDLE.setPOS((self.WINDOW.getVirtualWidth() - self.PADDLE.getWidth()) // 2, (self.WINDOW.getVirtualHeight() - (self.WINDOW.getVirtualHeight() // 8)))
         self.BALL.setPOS((self.WINDOW.getVirtualWidth() - self.BALL.getWidth()) // 2, (self.WINDOW.getVirtualHeight() - (self.WINDOW.getVirtualHeight() // 8) * 2))
@@ -88,6 +121,13 @@ class Game:
             self.PADDLE.adMoveChkBounds(KEYPRESSES, self.WINDOW.getVirtualWidth(), self.WINDOW.getVirtualHeight())
             self.BALL.bounce(self.WINDOW)
 
+            if self.getPaddleBallCollision() == True:
+                self.BALL.DIR_Y = -1
+                self.BALL.SPEED += 0.2
+
+            if self.BALL.Y > self.WINDOW.getVirtualHeight() - self.BALL.getHeight():
+                self.endScreen()
+
             self.WINDOW.clearScreen()
             for brick in self.BRICKS:
                 self.WINDOW.getScreen().blit(brick.getScreen(), brick.getPOS())
@@ -99,4 +139,3 @@ class Game:
 if __name__ == "__main__":
     GAME = Game()
     GAME.startScreen()
-    GAME.run()
