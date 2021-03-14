@@ -19,7 +19,6 @@ class Window:
         self.FRAME = pygame.time.Clock()
         self.SCREEN = pygame.display.set_mode(self.SCREEN_DIMENSIONS)
         self.BACKGROUND = Colour.GREY
-        self.BACKGROUND_IMAGE = None
         self.SCREEN.fill(self.BACKGROUND)
         self.CAPTION = pygame.display.set_caption(self.TITLE)
 
@@ -29,19 +28,7 @@ class Window:
         pygame.display.flip()
 
     def clearScreen(self):
-        if self.BACKGROUND_IMAGE == None:
-            self.SCREEN.fill(self.BACKGROUND)
-        else:
-            self.SCREEN.blit(self.BACKGROUND_IMAGE.getScreen(), self.BACKGROUND_IMAGE.getPOS())
-
-    def setBackgroundImage(self, IMAGE_FILE):
-        self.BACKGROUND_IMAGE = ImageSprite(IMAGE_FILE)
-        # Scale the Image to fit the Window
-        if self.BACKGROUND_IMAGE.getWidth() < self.getVirtualWidth():
-            self.BACKGROUND_IMAGE.setScale(self.BACKGROUND_IMAGE.getWidth() / self.getVirtualWidth())
-        if self.BACKGROUND_IMAGE.getHeight() < self.getVirtualHeight():
-            self.BACKGROUND_IMAGE.setScale(self.BACKGROUND_IMAGE.getHeight() / self.getVirtualHeight())
-        self.clearScreen()
+        self.SCREEN.fill(self.BACKGROUND)
 
 
     def setBackgroundColor(self, COLOR):

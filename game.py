@@ -7,7 +7,6 @@ Date: 2021-03-08
 import pygame
 from random import randrange
 from window import Window
-from imageSprite import ImageSprite
 from loader import Colour
 from paddle import Paddle
 from ball import Ball
@@ -112,17 +111,53 @@ class Game:
             self.SUBTITLE4 = Text("The ball progressively gets faster with each hit!", FONTSIZE=20)
             self.SUBTITLE5 = Text("Press enter to continue.", FONTSIZE=20)
             self.SUBTITLE6 = Text("Press ESC to exit.", FONTSIZE=20)
-            self.TITLE.setPOS((self.WINDOW.getVirtualWidth() - self.TITLE.getWidth()) // 2, (self.WINDOW.getVirtualHeight() - self.TITLE.getHeight()) // 2 - 50)
-            self.SUBTITLE.setPOS((self.WINDOW.getVirtualWidth() - self.SUBTITLE.getWidth()) // 2, (self.WINDOW.getVirtualHeight() - self.SUBTITLE.getHeight()) // 2 + 20)
-            self.SUBTITLE4.setPOS((self.WINDOW.getVirtualWidth() - self.SUBTITLE4.getWidth()) // 2, (self.WINDOW.getVirtualHeight() - self.SUBTITLE4.getHeight()) // 2 + 50)
-            self.SUBTITLE5.setPOS((self.WINDOW.getVirtualWidth() - self.SUBTITLE5.getWidth()) // 2, (self.WINDOW.getVirtualHeight() - self.SUBTITLE5.getHeight()) // 2 + 80)
-            self.SUBTITLE6.setPOS((self.WINDOW.getVirtualWidth() - self.SUBTITLE6.getWidth()) // 2, (self.WINDOW.getVirtualHeight() - self.SUBTITLE6.getHeight()) // 2 + 110)
+            self.SUBTITLE9 = Text("What colour paddle would you like?", FONTSIZE=20)
+            self.OPT1 = Text("[1] Default: White", FONTSIZE=15)
+            self.OPT2 = Text("[2]: Grey", FONTSIZE=15)
+            self.OPT3 = Text("[3]: Red", FONTSIZE=15)
+            self.OPT4 = Text("[4]: Green", FONTSIZE=15)
+            self.OPT5 = Text("[5]: Magenta", FONTSIZE=15)
+            self.TITLE.setPOS((self.WINDOW.getVirtualWidth() - self.TITLE.getWidth()) // 2, (self.WINDOW.getVirtualHeight() - self.TITLE.getHeight()) // 2 - 100)
+            self.SUBTITLE.setPOS((self.WINDOW.getVirtualWidth() - self.SUBTITLE.getWidth()) // 2, (self.WINDOW.getVirtualHeight() - self.SUBTITLE.getHeight()) // 2 - 30)
+            self.SUBTITLE4.setPOS((self.WINDOW.getVirtualWidth() - self.SUBTITLE4.getWidth()) // 2, (self.WINDOW.getVirtualHeight() - self.SUBTITLE4.getHeight()) // 2 + 0)
+            self.SUBTITLE5.setPOS((self.WINDOW.getVirtualWidth() - self.SUBTITLE5.getWidth()) // 2, (self.WINDOW.getVirtualHeight() - self.SUBTITLE5.getHeight()) // 2 + 30)
+            self.SUBTITLE6.setPOS((self.WINDOW.getVirtualWidth() - self.SUBTITLE6.getWidth()) // 2, (self.WINDOW.getVirtualHeight() - self.SUBTITLE6.getHeight()) // 2 + 60)
+            self.SUBTITLE9.setPOS((self.WINDOW.getVirtualWidth() - self.SUBTITLE9.getWidth()) // 2, (self.WINDOW.getVirtualHeight() - self.SUBTITLE9.getHeight()) // 2 + 90)
+            self.OPT1.setPOS((self.WINDOW.getVirtualWidth() - self.OPT1.getWidth()) // 2, (self.WINDOW.getVirtualHeight() - self.OPT1.getHeight()) // 2 + 115)
+            self.OPT2.setPOS((self.WINDOW.getVirtualWidth() - self.OPT2.getWidth()) // 2, (self.WINDOW.getVirtualHeight() - self.OPT2.getHeight()) // 2 + 140)
+            self.OPT3.setPOS((self.WINDOW.getVirtualWidth() - self.OPT3.getWidth()) // 2, (self.WINDOW.getVirtualHeight() - self.OPT3.getHeight()) // 2 + 165)
+            self.OPT4.setPOS((self.WINDOW.getVirtualWidth() - self.OPT4.getWidth()) // 2, (self.WINDOW.getVirtualHeight() - self.OPT4.getHeight()) // 2 + 190)
+            self.OPT5.setPOS((self.WINDOW.getVirtualWidth() - self.OPT5.getWidth()) // 2, (self.WINDOW.getVirtualHeight() - self.OPT5.getHeight()) // 2 + 215)
             self.WINDOW.getScreen().blit(self.TITLE.getScreen(), self.TITLE.getPOS())
             self.WINDOW.getScreen().blit(self.SUBTITLE.getScreen(), self.SUBTITLE.getPOS())
             self.WINDOW.getScreen().blit(self.SUBTITLE4.getScreen(), self.SUBTITLE4.getPOS())
             self.WINDOW.getScreen().blit(self.SUBTITLE5.getScreen(), self.SUBTITLE5.getPOS())
             self.WINDOW.getScreen().blit(self.SUBTITLE6.getScreen(), self.SUBTITLE6.getPOS())
+            self.WINDOW.getScreen().blit(self.SUBTITLE9.getScreen(), self.SUBTITLE9.getPOS())
+            self.WINDOW.getScreen().blit(self.OPT1.getScreen(), self.OPT1.getPOS())
+            self.WINDOW.getScreen().blit(self.OPT2.getScreen(), self.OPT2.getPOS())
+            self.WINDOW.getScreen().blit(self.OPT3.getScreen(), self.OPT3.getPOS())
+            self.WINDOW.getScreen().blit(self.OPT4.getScreen(), self.OPT4.getPOS())
+            self.WINDOW.getScreen().blit(self.OPT5.getScreen(), self.OPT5.getPOS())
+
             self.WINDOW.updateFrame()
+
+            if KEYPRESSES[pygame.K_1]:
+                self.PADDLE.COLOUR = Colour.WHITE
+                self.PADDLE.SCREEN.fill(self.PADDLE.COLOUR)
+            if KEYPRESSES[pygame.K_2]:
+                self.PADDLE.COLOUR = Colour.GREY
+                self.PADDLE.SCREEN.fill(self.PADDLE.COLOUR)
+            if KEYPRESSES[pygame.K_3]:
+                self.PADDLE.COLOUR = Colour.RED
+                self.PADDLE.SCREEN.fill(self.PADDLE.COLOUR)
+            if KEYPRESSES[pygame.K_4]:
+                self.PADDLE.COLOUR = Colour.GREEN
+                self.PADDLE.SCREEN.fill(self.PADDLE.COLOUR)
+            if KEYPRESSES[pygame.K_5]:
+                self.PADDLE.COLOUR = Colour.MAGENTA
+                self.PADDLE.SCREEN.fill(self.PADDLE.COLOUR)
+
 
             if KEYPRESSES[pygame.K_RETURN]:
                 self.runLvl1()

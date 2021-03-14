@@ -32,19 +32,6 @@ class MySprite:
     def updateDimension(self):
         self.DIMENSION = (self.WIDTH, self.HEIGHT)
 
-    def wasdMove(self, KEYPRESSES):
-        # CHECK KEYPRESSES
-        if KEYPRESSES[pygame.K_d] == 1:
-            self.X = self.X + self.SPD
-        if KEYPRESSES[pygame.K_a] == 1:
-            self.X -= self.SPD
-        if KEYPRESSES[pygame.K_w] == 1:
-            self.Y -= self.SPD
-        if KEYPRESSES[pygame.K_s] == 1:
-            self.Y += self.SPD
-
-        self.POS = (self.X, self.Y)
-
     # Getters
 
     def getScreen(self):
@@ -83,7 +70,3 @@ class MySprite:
             self.Y = MINHEIGHT
 
         self.updatePOS()
-
-    def wasdMoveChkBounds(self, KEYPRESSES, MAXWIDTH, MAXHEIGHT, MINWIDTH=0, MINHEIGHT=0):
-        self.wasdMove(KEYPRESSES)
-        self.checkBounds(MAXWIDTH, MAXHEIGHT, MINWIDTH, MINHEIGHT)
