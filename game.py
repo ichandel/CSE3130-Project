@@ -40,20 +40,55 @@ class Game:
             self.BRICKS.append(NEWBRICK)
 
     def placeBricksLvl2(self):
-        STARTX = self.WINDOW.getVirtualWidth() // 10
+        STARTX = 0
         STARTY = 50
         for i in range(28):
-            if STARTX < (self.WINDOW.getVirtualWidth() // 10) * 8:
-                STARTX = STARTX + self.WINDOW.getVirtualWidth() // 10
+            if STARTX < (self.WINDOW.getVirtualWidth() // 9) * 7:
+                STARTX = STARTX + self.WINDOW.getVirtualWidth() // 9
             else:
-                STARTX = self.WINDOW.getVirtualWidth() // 10
+                STARTX = self.WINDOW.getVirtualWidth() // 9
                 STARTY = STARTY + 120
             NEWBRICK = Brick(STARTX, STARTY)
             self.BRICKS.append(NEWBRICK)
 
     def makeColoursHot(self):
         for i in range(len(self.BRICKS)):
-            HOTS = randrange(5)
+            HOTS = randrange(1, 6)
+            if HOTS == 1:
+                self.BRICKS[i].COLOUR = Colour.INDIAN_RED
+                self.BRICKS[i].SCREEN.fill(self.BRICKS[i].COLOUR)
+            elif HOTS == 2:
+                self.BRICKS[i].COLOUR = Colour.PINK
+                self.BRICKS[i].SCREEN.fill(self.BRICKS[i].COLOUR)
+            elif HOTS == 3:
+                self.BRICKS[i].COLOUR = Colour.PASTEL_PINK
+                self.BRICKS[i].SCREEN.fill(self.BRICKS[i].COLOUR)
+            elif HOTS == 4:
+                self.BRICKS[i].COLOUR = Colour.CORAL
+                self.BRICKS[i].SCREEN.fill(self.BRICKS[i].COLOUR)
+            elif HOTS == 5:
+                self.BRICKS[i].COLOUR = Colour.PALE_VIOLET_RED
+                self.BRICKS[i].SCREEN.fill(self.BRICKS[i].COLOUR)
+
+    def makeColoursCold(self):
+        for i in range(len(self.BRICKS)):
+            COLDS = randrange(1, 6)
+            if COLDS == 1:
+                self.BRICKS[i].COLOUR = Colour.MEDIUM_SPRING_GREEN
+                self.BRICKS[i].SCREEN.fill(self.BRICKS[i].COLOUR)
+            elif COLDS == 2:
+                self.BRICKS[i].COLOUR = Colour.CORNFLOWER_BLUE
+                self.BRICKS[i].SCREEN.fill(self.BRICKS[i].COLOUR)
+            elif COLDS == 3:
+                self.BRICKS[i].COLOUR = Colour.DARK_SLATE_BLUE
+                self.BRICKS[i].SCREEN.fill(self.BRICKS[i].COLOUR)
+            elif COLDS == 4:
+                self.BRICKS[i].COLOUR = Colour.MEDIUM_AQUAMARINE
+                self.BRICKS[i].SCREEN.fill(self.BRICKS[i].COLOUR)
+            elif COLDS == 5:
+                self.BRICKS[i].COLOUR = Colour.DARK_CYAN
+                self.BRICKS[i].SCREEN.fill(self.BRICKS[i].COLOUR)
+
 
     def getPaddleBallCollision(self):
         if pygame.Rect.colliderect(self.PADDLE.getRect(), self.BALL.getRect()):
@@ -134,10 +169,10 @@ class Game:
             self.TITLE3 = Text("Level One Complete!")
             self.SUBTITLE7 = Text("Press enter to continue to Level 2.", FONTSIZE=20)
             self.SUBTITLE3 = Text("Press ESC to exit.", FONTSIZE=20)
-            self.TITLE2.setPOS((self.WINDOW.getVirtualWidth() - self.TITLE2.getWidth()) // 2, (self.WINDOW.getVirtualHeight() - self.TITLE2.getHeight()) // 2 - 50)
+            self.TITLE3.setPOS((self.WINDOW.getVirtualWidth() - self.TITLE3.getWidth()) // 2, (self.WINDOW.getVirtualHeight() - self.TITLE3.getHeight()) // 2 - 50)
             self.SUBTITLE7.setPOS((self.WINDOW.getVirtualWidth() - self.SUBTITLE7.getWidth()) // 2, (self.WINDOW.getVirtualHeight() - self.SUBTITLE7.getHeight()) // 2 + 20)
             self.SUBTITLE3.setPOS((self.WINDOW.getVirtualWidth() - self.SUBTITLE3.getWidth()) // 2, (self.WINDOW.getVirtualHeight() - self.SUBTITLE3.getHeight()) // 2 + 50)
-            self.WINDOW.getScreen().blit(self.TITLE2.getScreen(), self.TITLE2.getPOS())
+            self.WINDOW.getScreen().blit(self.TITLE3.getScreen(), self.TITLE3.getPOS())
             self.WINDOW.getScreen().blit(self.SUBTITLE7.getScreen(), self.SUBTITLE7.getPOS())
             self.WINDOW.getScreen().blit(self.SUBTITLE3.getScreen(), self.SUBTITLE3.getPOS())
             self.WINDOW.updateFrame()
@@ -158,14 +193,14 @@ class Game:
 
             KEYPRESSES = pygame.key.get_pressed()
 
-            self.TITLE3 = Text("Game Complete!")
-            self.SUBTITLE7 = Text("Press enter to return to the Start Screen.", FONTSIZE=20)
+            self.TITLE4 = Text("Game Complete!")
+            self.SUBTITLE8 = Text("Press enter to return to the Start Screen.", FONTSIZE=20)
             self.SUBTITLE3 = Text("Press ESC to exit.", FONTSIZE=20)
-            self.TITLE2.setPOS((self.WINDOW.getVirtualWidth() - self.TITLE2.getWidth()) // 2, (self.WINDOW.getVirtualHeight() - self.TITLE2.getHeight()) // 2 - 50)
-            self.SUBTITLE7.setPOS((self.WINDOW.getVirtualWidth() - self.SUBTITLE7.getWidth()) // 2, (self.WINDOW.getVirtualHeight() - self.SUBTITLE7.getHeight()) // 2 + 20)
+            self.TITLE4.setPOS((self.WINDOW.getVirtualWidth() - self.TITLE4.getWidth()) // 2, (self.WINDOW.getVirtualHeight() - self.TITLE4.getHeight()) // 2 - 50)
+            self.SUBTITLE8.setPOS((self.WINDOW.getVirtualWidth() - self.SUBTITLE8.getWidth()) // 2, (self.WINDOW.getVirtualHeight() - self.SUBTITLE8.getHeight()) // 2 + 20)
             self.SUBTITLE3.setPOS((self.WINDOW.getVirtualWidth() - self.SUBTITLE3.getWidth()) // 2, (self.WINDOW.getVirtualHeight() - self.SUBTITLE3.getHeight()) // 2 + 50)
-            self.WINDOW.getScreen().blit(self.TITLE2.getScreen(), self.TITLE2.getPOS())
-            self.WINDOW.getScreen().blit(self.SUBTITLE7.getScreen(), self.SUBTITLE7.getPOS())
+            self.WINDOW.getScreen().blit(self.TITLE4.getScreen(), self.TITLE4.getPOS())
+            self.WINDOW.getScreen().blit(self.SUBTITLE8.getScreen(), self.SUBTITLE8.getPOS())
             self.WINDOW.getScreen().blit(self.SUBTITLE3.getScreen(), self.SUBTITLE3.getPOS())
             self.WINDOW.updateFrame()
 
@@ -177,6 +212,8 @@ class Game:
     def runLvl1(self):
 
         self.placeBricksLvl1()
+        self.makeColoursHot()
+
         self.SCORE_TEXT.setText(f"Score: {self.SCORE}")
         self.BALL.SPEED = 5
 
@@ -251,11 +288,8 @@ class Game:
 
     def runLvl2(self):
 
-        for i in range(len(self.BRICKS)):
-            self.BRICKS[i].COLOUR = Colour.BLUE
-            self.BRICKS[i].SCREEN.fill(self.BRICKS[i].COLOUR)
-
         self.placeBricksLvl2()
+        self.makeColoursCold()
         self.SCORE_TEXT.setText(f"Score: {self.SCORE}")
         self.BALL.SPEED = 5
 
@@ -308,7 +342,7 @@ class Game:
                         self.SCORE += 1
                         self.SCORE_TEXT.setText(f"Score: {self.SCORE}")
                         break
-            elif len(self.BRICKS) <= 0 and self.SCORE == 24:
+            elif len(self.BRICKS) <= 0 and self.SCORE == 52:
                 self.winScreen()
 
 

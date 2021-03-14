@@ -15,7 +15,7 @@ class Brick(MySprite):
         self.X = X
         self.Y = Y
         self.POS = (self.X, self.Y)
-        self.COLOUR = Colour.MAGENTA
+        self.COLOUR = Colour.GREY
         self.TOP = pygame.Rect((self.X, self.Y), (150, 10))
         self.LEFT = pygame.Rect((self.X, self.Y), (10, 100))
         self.RIGHT = pygame.Rect((self.X + 150, self.Y), (10, 100))
