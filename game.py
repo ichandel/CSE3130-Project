@@ -229,7 +229,7 @@ class Game:
             KEYPRESSES = pygame.key.get_pressed()
 
             self.TITLE4 = Text("Game Complete!")
-            self.SUBTITLE8 = Text("Press enter to return to the Start Screen.", FONTSIZE=20)
+            self.SUBTITLE8 = Text("Press enter to play again.", FONTSIZE=20)
             self.SUBTITLE3 = Text("Press ESC to exit.", FONTSIZE=20)
             self.TITLE4.setPOS((self.WINDOW.getVirtualWidth() - self.TITLE4.getWidth()) // 2, (self.WINDOW.getVirtualHeight() - self.TITLE4.getHeight()) // 2 - 50)
             self.SUBTITLE8.setPOS((self.WINDOW.getVirtualWidth() - self.SUBTITLE8.getWidth()) // 2, (self.WINDOW.getVirtualHeight() - self.SUBTITLE8.getHeight()) // 2 + 20)
@@ -240,7 +240,7 @@ class Game:
             self.WINDOW.updateFrame()
 
             if KEYPRESSES[pygame.K_RETURN]:
-                self.startScreen()
+                self.runLvl1()
             if KEYPRESSES[pygame.K_ESCAPE]:
                 exit()
 
