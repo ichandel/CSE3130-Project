@@ -15,11 +15,11 @@ class Brick(MySprite):
         self.X = X
         self.Y = Y
         self.POS = (self.X, self.Y)
-        self.COLOUR = Colour.GREY
-        '''self.TOP = pygame.Rect(self.X, self.Y)
-        self.LEFT = pygame.Rect(self.X, self.Y)
-        self.RIGHT = pygame.Rect(self.X, self.Y)
-        self.BOTTOM = pygame.Rect(self.X, self.Y)'''
+        self.COLOUR = Colour.MAGENTA
+        self.TOP = pygame.Rect((self.X, self.Y), (150, 10))
+        self.LEFT = pygame.Rect((self.X, self.Y), (10, 100))
+        self.RIGHT = pygame.Rect((self.X + 150, self.Y), (10, 100))
+        self.BOTTOM = pygame.Rect((self.X, self.Y + 100), (150, 10))
         self.WIDTH = 150
         self.HEIGHT = 100
         self.DIMENSION = (self.WIDTH, self.HEIGHT)

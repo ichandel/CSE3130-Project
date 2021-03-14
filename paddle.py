@@ -21,7 +21,7 @@ class Paddle(MySprite):
         self.DIMENSION = (self.WIDTH, self.HEIGHT)
         self.SCREEN = pygame.Surface(self.DIMENSION, pygame.SRCALPHA, 32)
         self.SCREEN.fill(self.COLOUR)
-        self.SPEED = 5
+        self.SPEED = 10
 
     def adMove(self, KEYPRESSES):
         if KEYPRESSES[pygame.K_a]:
