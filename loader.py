@@ -5,6 +5,9 @@ date-created: 2021-03-08
 """
 
 class Colour:
+    """
+    class filled with rgb values for desired colours
+    """
     WHITE = (255, 255, 255)
     GREY = (50, 50, 50)
     RED = (255, 0, 0)

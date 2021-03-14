@@ -27,6 +27,9 @@ class Game:
         self.SCORE_TEXT = Text(f"Score: {self.SCORE}", FONTSIZE=30)
 
     def placeBricksLvl1(self):
+        """
+        places all bricks for level 1
+        """
         STARTX = 0
         STARTY = 50
         for i in range(24):
@@ -39,6 +42,9 @@ class Game:
             self.BRICKS.append(NEWBRICK)
 
     def placeBricksLvl2(self):
+        """
+        places all bricks for level 2
+        """
         STARTX = 0
         STARTY = 50
         for i in range(28):
@@ -51,6 +57,11 @@ class Game:
             self.BRICKS.append(NEWBRICK)
 
     def makeColoursHot(self):
+        """
+        changes bricks' colour to warmer colour temperatures
+        This is an example of aggregation where each brick's colour is changed individually despite all of them being
+        the same type of object and in the same array.
+        """
         for i in range(len(self.BRICKS)):
             HOTS = randrange(1, 6)
             if HOTS == 1:
@@ -70,6 +81,9 @@ class Game:
                 self.BRICKS[i].SCREEN.fill(self.BRICKS[i].COLOUR)
 
     def makeColoursCold(self):
+        """
+        changes bricks' colour to colder colour temperatures
+        """
         for i in range(len(self.BRICKS)):
             COLDS = randrange(1, 6)
             if COLDS == 1:
@@ -90,12 +104,19 @@ class Game:
 
 
     def getPaddleBallCollision(self):
+        """
+        checks for collision between paddle and ball
+        :return: boolean
+        """
         if pygame.Rect.colliderect(self.PADDLE.getRect(), self.BALL.getRect()):
             return True
         else:
             return False
 
     def startScreen(self):
+        """
+        makes start screen for game
+        """
 
         while True:
             # Inputs
@@ -105,6 +126,8 @@ class Game:
                     exit()
 
             KEYPRESSES = pygame.key.get_pressed()
+
+            # the follosing code creates, positions and blits on various text objects for user readability
 
             self.TITLE = Text("Welcome To Brickbreaker :)!")
             self.SUBTITLE = Text("Use the A and D keys to move your paddle.", FONTSIZE=20)
@@ -142,9 +165,13 @@ class Game:
 
             self.WINDOW.updateFrame()
 
+            # processing
+
+            # the following code allows the paddle object to change colour according to user needs
+
             if KEYPRESSES[pygame.K_1]:
                 self.PADDLE.COLOUR = Colour.WHITE
-                self.PADDLE.SCREEN.fill(self.PADDLE.COLOUR)
+                self.PADDLE.SCREEN.fill(self.PADDLE.COLOUR) # output
             if KEYPRESSES[pygame.K_2]:
                 self.PADDLE.COLOUR = Colour.GREY
                 self.PADDLE.SCREEN.fill(self.PADDLE.COLOUR)
@@ -159,9 +186,9 @@ class Game:
                 self.PADDLE.SCREEN.fill(self.PADDLE.COLOUR)
 
 
-            if KEYPRESSES[pygame.K_RETURN]:
+            if KEYPRESSES[pygame.K_RETURN]: # this line runs the maing game once the user is ready
                 self.runLvl1()
-            if KEYPRESSES[pygame.K_ESCAPE]:
+            if KEYPRESSES[pygame.K_ESCAPE]: # this exits the program when the user wishes to
                 exit()
 
     def endScreen(self):
@@ -190,7 +217,7 @@ class Game:
                 self.runLvl1()
             if KEYPRESSES[pygame.K_ESCAPE]:
                 exit()
-    def pauseScreen(self):
+    def pauseScreen(self): # screen between levels to allow for a break
 
         while True:
             # Inputs
@@ -217,7 +244,7 @@ class Game:
             if KEYPRESSES[pygame.K_ESCAPE]:
                 exit()
 
-    def winScreen(self):
+    def winScreen(self): # screen displayed after completing level 2
 
         while True:
             # Inputs
@@ -245,10 +272,13 @@ class Game:
                 exit()
 
     def runLvl1(self):
+        """
+        contains code to create and run all of level 1 and its roles
+        """
 
         self.placeBricksLvl1()
         self.makeColoursHot()
-
+        self.SCORE = 0
         self.SCORE_TEXT.setText(f"Score: {self.SCORE}")
         self.BALL.SPEED = 5
 
@@ -271,13 +301,13 @@ class Game:
             self.PADDLE.adMoveChkBounds(KEYPRESSES, self.WINDOW.getVirtualWidth(), self.WINDOW.getVirtualHeight())
             self.BALL.bounce(self.WINDOW)
 
-            if self.getPaddleBallCollision() == True:
+            if self.getPaddleBallCollision() == True: # makes ball bounce off paddle
                 self.BALL.DIR_Y = -1
-                self.BALL.SPEED += 0.2
+                self.BALL.SPEED += 0.2 # speeds ball up to increase difficulty everytime ball hits paddle
 
-            if len(self.BRICKS) > 0:
+            if len(self.BRICKS) > 0: # runs code for collisions as long as their are bricks on screen
                 for i in range(len(self.BRICKS) - 1, -1, -1):
-                    if pygame.Rect.colliderect(self.BALL.getRect(), self.BRICKS[i].TOP):
+                    if pygame.Rect.colliderect(self.BALL.getRect(), self.BRICKS[i].TOP): # checks for collision with top rect and so on
                         self.BALL.DIR_Y = -1
                         self.BRICKS.pop(i)
                         self.SCORE += 1
@@ -301,17 +331,23 @@ class Game:
                         self.SCORE += 1
                         self.SCORE_TEXT.setText(f"Score: {self.SCORE}")
                         break
-            elif len(self.BRICKS) <= 0 and self.SCORE == 24:
+            elif len(self.BRICKS) <= 0 and self.SCORE == 24: # after all bricks have been hit and the score has reached 24 takes user to pause screen
                 self.pauseScreen()
 
 
 
-            if self.BALL.Y > self.WINDOW.getVirtualHeight() - self.BALL.getHeight():
+            if self.BALL.Y > self.WINDOW.getVirtualHeight() - self.BALL.getHeight(): # code that displays game over screen if the ball hits the bottom border
                 for i in range(len(self.BRICKS) - 1, -1, -1):
                     self.BRICKS.pop(i)
                 self.SCORE = 0
                 self.SCORE_TEXT.setText(f"Score: {self.SCORE}")
                 self.endScreen()
+
+            """
+            an example of encapsulation can be viewed here where the user only sees the basic objects that have been
+            blit onto the screen but doesn't see the code that counts score and makes the ball bounce and pickup pace
+            as well as see the code that randomizes the bricks' colours
+            """
 
             self.WINDOW.clearScreen()
             for brick in self.BRICKS:
@@ -322,6 +358,9 @@ class Game:
             self.WINDOW.updateFrame()
 
     def runLvl2(self):
+        """
+        contains code to create and run all of level 2 and its roles
+        """
 
         self.placeBricksLvl2()
         self.makeColoursCold()

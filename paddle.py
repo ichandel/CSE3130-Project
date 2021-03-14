@@ -8,7 +8,7 @@ from mySprite import MySprite
 from loader import Colour
 import pygame
 
-class Paddle(MySprite):
+class Paddle(MySprite): # a child class from the parent (MySprite) class. Example of inheritance
 
     def __init__(self):
         super().__init__()
@@ -24,11 +24,25 @@ class Paddle(MySprite):
         self.SPEED = 10
 
     def adMove(self, KEYPRESSES):
+        """
+        method for the horizontal movement of the paddle
+        :param KEYPRESSES: array
+        :return: none
+        """
         if KEYPRESSES[pygame.K_a]:
             self.X = self.X - self.SPEED
         if KEYPRESSES[pygame.K_d]:
             self.X = self.X + self.SPEED
 
     def adMoveChkBounds(self, KEYPRESSES, MAXWIDTH, MAXHEIGHT, MINWIDTH=0, MINHEIGHT=0):
+        """
+        method to combine movement and stop at bounds
+        :param KEYPRESSES: array
+        :param MAXWIDTH: int
+        :param MAXHEIGHT: int
+        :param MINWIDTH: int
+        :param MINHEIGHT: int
+        :return: none
+        """
         self.adMove(KEYPRESSES)
         self.checkBounds(MAXWIDTH, MAXHEIGHT, MINWIDTH, MINHEIGHT)

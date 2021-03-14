@@ -9,7 +9,7 @@ from loader import Colour
 import pygame
 
 
-class Ball(MySprite):
+class Ball(MySprite): # a child class from the parent (MySprite) class. Example of inheritance
 
     def __init__(self):
         super().__init__()
@@ -27,6 +27,11 @@ class Ball(MySprite):
         self.DIR_Y = -1
 
     def bounce(self, SCREEN):
+        """
+        method used to make the ball object bounce when it contacts the borders of the screen
+        :param SCREEN: object
+        :return: none
+        """
         self.X = self.X + self.DIR_X * self.SPEED
         self.Y = self.Y + self.DIR_Y * self.SPEED
         if self.X > SCREEN.getVirtualWidth() - self.getWidth():

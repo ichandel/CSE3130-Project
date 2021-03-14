@@ -11,6 +11,13 @@ from imageSprite import ImageSprite
 class Window:
 
     def __init__(self, TITLE="Pygame", WIDTH=640, HEIGHT=480, FPS=30):
+        """
+        initializes the window used for the main program
+        :param TITLE: string
+        :param WIDTH: int
+        :param HEIGHT: int
+        :param FPS: int
+        """
         self.TITLE = TITLE
         self.FPS = FPS
         self.WIDTH = WIDTH

@@ -8,9 +8,14 @@ from mySprite import MySprite
 from loader import Colour
 import pygame
 
-class Brick(MySprite):
+class Brick(MySprite): # a child class from the parent (MySprite) class. Example of inheritance
 
     def __init__(self, X, Y):
+        """
+        initializes the brick object
+        :param X: int
+        :param Y: int
+        """
         super().__init__()
         self.X = X
         self.Y = Y
